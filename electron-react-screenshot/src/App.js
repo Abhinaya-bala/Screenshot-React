@@ -3,28 +3,39 @@ import { Button } from "react-bootstrap";
 import "./App.css";
 const electron = window.require("electron");
 const ipcRenderer = electron.ipcRenderer;
+
 function App() {
-  let intervalId = null;
   const [disable, setDisabled] = useState(false);
+  const [intervalId, setIntervalId] = useState(null);
+
   const startCapture = () => {
     //  console.log("clicked start");
     if (intervalId != null) {
       return;
     }
     ipcRenderer.send("takeScreenShot");
-    intervalId = setInterval(() => {
+    console.log("image captured initial");
+
+    const temp = setInterval(() => {
       ipcRenderer.send("takeScreenShot");
       console.log("image captured");
-    }, 10000);
-    useEffect(() => {
-      setDisabled(false);
-    });
+    }, 300000);
+    setDisabled(true);
+    setIntervalId(temp);
   };
 
+  useEffect(() => {
+    return () => {
+      console.log("cleaned up check");
+      stopCapture();
+    };
+  }, []);
+
   const stopCapture = () => {
-    clearInterval(intervalId);
     console.log("capture stoped", intervalId);
-    intervalId = null;
+    clearInterval(intervalId);
+    setIntervalId(null);
+    setDisabled(false);
   };
 
   return (
@@ -38,14 +49,20 @@ function App() {
       </p>
       <Button
         variant="success"
-        size="lg"
-        className="px-5"
-        disabled={false}
+        size="sm"
+        className="px-5 mx-2"
+        disabled={disable}
         onClick={startCapture}
       >
         Start Capture
       </Button>
-      <Button variant="danger" size="lg" className="px-5" onClick={stopCapture}>
+      <Button
+        variant="danger"
+        size="sm"
+        className="px-5 mx-2"
+        onClick={stopCapture}
+        disabled={!disable}
+      >
         Stop Capture
       </Button>
     </div>

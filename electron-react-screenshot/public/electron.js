@@ -44,7 +44,7 @@ app.on("activate", () => {
 
 function takeSreenShot() {
   //console.log("clicked start");
-  const filename = Date.now();
+  const filename = `${new Date().toDateString()} ${new Date().toTimeString()}`;
   screenshot({ format: "png", filename: `./screenshot/${filename}.png` })
     .then((img) => {
       console.log(img);
