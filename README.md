@@ -1,6 +1,20 @@
-## Available Scripts
+![Designqube](https://imgur.com/a/BSvTDFf)
 
-In the project directory, you can run:
+## Release Link
+
+https://github.com/Abhinaya-bala/Screenshot-React/releases/tag/1.0
+
+## About the Project
+
+Objective
+
+The objective of this assignment is to achieve desktop application that need to take a screenshot of the screen in every 5 minutes of the time interval. The taken screenshot can be stored in system's file storage.
+
+## Technology used
+
+1. React Js
+2. Electron Js
+3. Bootstrap
 
 ### `npm electron-dev`
 
