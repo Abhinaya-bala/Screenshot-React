@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Accordion } from "react-bootstrap";
 import "./App.css";
 const electron = window.require("electron");
 const ipcRenderer = electron.ipcRenderer;
@@ -38,6 +38,10 @@ function App() {
     setDisabled(false);
   };
 
+  const toSeeCaptures = () => {
+    ipcRenderer.send("openDirectory");
+  };
+
   return (
     <div className="App">
       <p className="text-muted text-uppercase fs-1">
@@ -65,6 +69,16 @@ function App() {
       >
         Stop Capture
       </Button>
+
+      <Accordion.Toggle
+        as={Button}
+        variant="link"
+        eventKey="0"
+        className="my-3"
+        onClick={toSeeCaptures}
+      >
+        To See Screenshot
+      </Accordion.Toggle>
     </div>
   );
 }
