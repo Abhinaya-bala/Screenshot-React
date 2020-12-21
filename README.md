@@ -1,4 +1,4 @@
-![Designqube](https://imgur.com/Bvl0YfI)
+![Designqube](https://i.imgur.com/Bvl0YfI.png)
 
 ## Release Link
 
